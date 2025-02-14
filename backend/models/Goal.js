@@ -17,7 +17,7 @@ const GoalSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ["daily", "weekly"],
+        enum: ["daily", "weekly","monthly"],
         required: true
     },
     createdAt: {

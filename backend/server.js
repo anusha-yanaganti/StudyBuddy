@@ -6,6 +6,9 @@ const dotenv = require("dotenv");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
+const progressRoutes = require("./routes/progress");
+// Import Pomodoro Timer Routes
+const pomodoroRoutes = require("./routes/timer");
 
 dotenv.config();
 const app = express();
@@ -30,6 +33,10 @@ app.use("/api/user", userRoutes);
 app.use("/api/timetable", require("./routes/timetableRoutes"));
 app.use("/api/goals", require("./routes/goals"));
 app.use("/api/resources", resourceRoutes);
+app.use("/api/progress", progressRoutes);
+// ✅ Add Pomodoro Timer Route
+app.use("/api/timer", pomodoroRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

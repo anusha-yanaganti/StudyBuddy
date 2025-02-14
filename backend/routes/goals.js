@@ -15,7 +15,7 @@ router.post(
     [
         authMiddleware,
         body("title").notEmpty().withMessage("Goal title is required"),
-        body("type").isIn(["daily", "weekly"]).withMessage("Type must be 'daily' or 'weekly'"),
+        body("type").isIn(["daily", "weekly","monthly"]).withMessage("Type must be 'daily' or 'weekly'"),
     ],
     goalController.addGoal
 );
