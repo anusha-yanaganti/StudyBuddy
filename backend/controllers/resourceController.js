@@ -13,7 +13,7 @@ exports.uploadResource = async (req, res) => {
                 userId,
                 subjectId,
                 resourceType,
-                fileUrl: req.file.path
+                fileURL: req.file.path
             };
         } else if (resourceType === "link" && link) {
             resourceData = {

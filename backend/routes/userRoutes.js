@@ -10,6 +10,10 @@ router.get("/profile", authMiddleware, async (req, res) => {
         if (!user) {
             return res.status(404).json({ msg: "User not found" });
         }
+        // Ensure progress exists
+        if (!user.progress) {
+          user.progress = { daily: 0, weekly: 0 };
+        }
         res.json(user);
     } catch (err) {
         console.error(err.message);
@@ -19,25 +23,36 @@ router.get("/profile", authMiddleware, async (req, res) => {
 
 
 // Update user profile
+// Update user profile
 router.put("/update", authMiddleware, async (req, res) => {
-    const { name, avatar } = req.body;
+  try {
+      const { name, avatar, progress } = req.body;
+      let user = await User.findById(req.user.id);
+      if (!user) return res.status(404).json({ msg: "User not found" });
 
-    try {
-        let user = await User.findById(req.user.id);
-        if (!user) return res.status(404).json({ msg: "User not found" });
+      // Update fields
+      if (name) user.name = name;
+      if (avatar) user.avatar = avatar;
 
-        // Update fields
-        if (name) user.name = name;
-        if (avatar) user.avatar = avatar; // Assuming avatar is a URL
+      // Ensure progress exists
+      if (!user.progress) {
+          user.progress = { daily: 0, weekly: 0 };
+      }
 
-        await user.save();
-        res.json({ msg: "Profile updated successfully", user });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send("Server Error");
-    }
+      // Update progress safely
+      if (progress) {
+          user.progress.daily = progress.daily ?? user.progress.daily;
+          user.progress.weekly = progress.weekly ?? user.progress.weekly;
+      }
+
+      await user.save();
+      res.json({ msg: "Profile updated successfully", user });
+
+  } catch (err) {
+      console.error("Profile Update Error:", err);  // Log the full error
+      res.status(500).json({ msg: "Server Error", error: err.message }); // Return error message
+  }
 });
-
 
 
 // ✅ Update Progress

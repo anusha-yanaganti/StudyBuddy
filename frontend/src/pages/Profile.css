@@ -1,0 +1,129 @@
+/* Profile Container */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to right, #e3f2fd, #f5f7fa);
+    font-family: 'Poppins', sans-serif;
+    width: 350px; /* Increase the width */
+    min-width: 280px; /* Prevent it from shrinking too much */
+    position: relative;
+}
+
+/* Profile Title */
+.profile-title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* User Data Text */
+.profile-text {
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 5px 0;
+}
+
+/* Avatar Image */
+.avatar-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 3px solid #007bff;
+    margin-bottom: 12px;
+}
+
+/* Editable Input */
+.edit-input {
+    width: 85%;
+    padding: 10px;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+/* Buttons */
+.edit-btn, .save-btn {
+    background: #2b8bd9 !important ;/* Red color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 8px;
+    border-radius: 6px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+
+/* Hover effect */
+.edit-btn:hover, .save-btn:hover {
+    background: #4a8dc4 !important ; /* Darker red for hover */
+    transform: scale(1.05);
+}
+/* Avatar Selection */
+.avatar-selector {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+/* Avatar Options */
+.avatar-option {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: transform 0.2s, border 0.2s;
+}
+
+.avatar-option:hover {
+    transform: scale(1.1);
+}
+
+.avatar-option.selected {
+    border: 3px solid #007bff;
+}
+
+/* Loading & Error Messages */
+.loading-text, .error-text {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #007bff;
+    margin-top: 10px;
+}
+
+.back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.back-arrow:hover {
+    color: #555;
+}
+
+/* Close (Exit) Button */
+.close-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ff0000;
+}
+
+.close-icon:hover {
+    color: #cc0000;
+}

@@ -15,11 +15,18 @@ router.post("/signup", [
         .isLength({ min: 6 }).withMessage("Password must be at least 6 characters")
         .matches(/\d/).withMessage("Password must contain at least one digit")
         .matches(/[!@#$%^&*(),.?":{}|<>]/).withMessage("Password must contain at least one special character"),
+    body("confirmPassword").custom((value, { req }) => {
+        if (value !== req.body.password) {
+            throw new Error("Passwords do not match");
+        }
+        return true;
+    })
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
+    
     const { name, email, password } = req.body;
 
     try {
@@ -57,16 +64,23 @@ router.post("/login", [
     try {
         let user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ msg: "Invalid credentials" });
+            return res.status(400).json({ msg: "User not found. Please sign up first." });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ msg: "Invalid credentials" });
+            return res.status(400).json({ msg: "Incorrect password. Please try again." });
         }
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-        res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
+        res.json({ 
+            token, 
+            user: { 
+                id: user._id, 
+                name: user.name,  // ✅ Now sending name back to frontend
+                email: user.email 
+            } 
+        });
     } catch (err) {
         res.status(500).json({ msg: "Server error" });
     }

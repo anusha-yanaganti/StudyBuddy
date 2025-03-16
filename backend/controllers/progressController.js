@@ -8,7 +8,6 @@ exports.getProgress = async (req, res) => {
         if (!progress) {
             return res.status(404).json({ msg: "No progress data found" });
         }
-
         res.json(progress);
     } catch (err) {
         console.error("Get Progress Error:", err.message);

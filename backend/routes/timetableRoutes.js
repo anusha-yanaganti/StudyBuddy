@@ -73,13 +73,24 @@ router.get("/", protect, async (req, res) => {
 
 
 // ✅ Delete Timetable
-router.delete("/", protect, async (req, res) => {
+// ✅ Delete Timetable by ID
+router.delete("/:id", protect, async (req, res) => {
   try {
-    await Timetable.findOneAndDelete({ user: req.user.id });
+    const timetableId = req.params.id;
+
+    const deletedTimetable = await Timetable.findByIdAndDelete(timetableId);
+
+
+    if (!deletedTimetable) {
+      return res.status(404).json({ msg: "Timetable not found or not authorized" });
+    }
+
     res.status(200).json({ msg: "Timetable deleted successfully" });
   } catch (error) {
+    console.error("Error deleting timetable:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
+
 
 module.exports = router;
