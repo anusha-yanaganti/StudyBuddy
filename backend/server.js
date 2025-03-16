@@ -7,7 +7,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
-const progressRoutes = require("./routes/progress");
+// const progressRoutes = require("./routes/progress");
 const pomodoroRoutes = require("./routes/timer");
 
 dotenv.config();
@@ -49,7 +49,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/timetable", require("./routes/timetableRoutes"));
 app.use("/api/goals", require("./routes/goals"));
 app.use("/api/resources", resourceRoutes);
-app.use("/api/progress", progressRoutes);
+app.use("/api/progress", require("./routes/progress"));
 app.use("/api/timer", pomodoroRoutes);
 
 const PORT = process.env.PORT || 5000;

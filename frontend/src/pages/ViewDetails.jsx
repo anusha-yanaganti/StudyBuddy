@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./ViewDetails.css";
-
+import Sidebar from "./Sidebar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -242,6 +242,7 @@ const handleLinkUpload = async () => {
         setSubtopics([]);
     };
     return (
+        
         <div className="view-details-page">
         <div className="container">
             <h2>Subject Details</h2>

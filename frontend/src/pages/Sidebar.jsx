@@ -1,33 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaClock, FaCalendar, FaChartLine } from "react-icons/fa";
 import defaultAvatar from "../assets/default-avatar.png"; // Default profile picture
 
-const Sidebar = ({ userAvatar }) => {
-  
-const navigate = useNavigate();
+const Sidebar = () => {
+    const navigate = useNavigate();
+    const [userAvatar, setUserAvatar] = useState(localStorage.getItem("userAvatar") || defaultAvatar);
 
-  return (
-    <div className="sidebar">
-      {/* Make Avatar Clickable */}
-      <img
-        src={userAvatar || defaultAvatar}
-        alt="User Avatar"
-        className="avatar"
-        onClick={() => navigate("/profile")} // ✅ Navigate to profile page on click
-        style={{ cursor: "pointer" }} // Add cursor pointer for better UX
-      />
+    useEffect(() => {
+        const handleStorageChange = () => {
+            setUserAvatar(localStorage.getItem("userAvatar") || defaultAvatar);
+        };
 
-      <nav className="nav-icons">
-        <FaClock className="icon" title="Pomodoro Timer" />
-        <Link to="/timetable">
-  <FaCalendar className="icon" title="Timetable" />
-</Link>
-        <FaChartLine className="icon" title="Progress Tracker" />
-      </nav>
-    </div>
-  );
+        window.addEventListener("storage", handleStorageChange);
+        return () => window.removeEventListener("storage", handleStorageChange);
+    }, []);
+
+    return (
+        <div className="sidebar">
+            {/* ✅ Display Updated Avatar */}
+            <img
+                src={userAvatar}
+                alt="User Avatar"
+                className="avatar"
+                onClick={() => navigate("/profile")}
+                style={{ cursor: "pointer" }}
+            />
+
+            <nav className="nav-icons">
+                <Link to="/pomodoro">
+                    <FaClock className="icon" title="Pomodoro Timer" />
+                </Link>
+                <Link to="/timetable">
+                    <FaCalendar className="icon" title="Timetable" />
+                </Link>
+                <Link to="/progress">
+                    <FaChartLine className="icon" title="Progress Tracker" />
+                </Link>
+            </nav>
+        </div>
+    );
 };
 
 export default Sidebar;

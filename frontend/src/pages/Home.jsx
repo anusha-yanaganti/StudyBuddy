@@ -24,12 +24,12 @@ const Home = () => {
 
           <div className="item">
             <span>Pomodoro Timer - "Boost Focus with Pomodoro"</span>
-            <button>start</button>
+            <button onClick={() => navigate("/pomodoro")}>Start</button>
           </div>
 
           <div className="item">
             <span>Progress Tracker - "Track Your Performance with Insights"</span>
-            <button>start</button>
+            <button onClick={() => navigate("/progress")}>Start</button>
           </div>
         </div>
       </div>

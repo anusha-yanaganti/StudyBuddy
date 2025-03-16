@@ -1,0 +1,62 @@
+.progress-container {
+    width: 100%;
+    margin: 80px 80px;
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    position: relative;
+  }
+  
+  h2 {
+    color: #fdfafa;
+    margin-bottom: 20px;
+  }
+  
+  .progress-bars {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+  }
+  
+  .progress-box {
+    width: 30%;
+    text-align: center;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    background: #ddd;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 5px;
+    
+    position: relative;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    transition: width 1s ease-in-out;
+  }
+  
+  .daily {
+    background-color: #3498db;
+  }
+  .weekly {
+    background-color: #e67e22;
+  }
+  .monthly {
+    background-color: #2ecc71;
+  }
+  
+  .progress-percent {
+    font-weight: bold;
+    margin-top: 5px;
+    display: block;
+  }
+  
+  .pie-chart-container {
+    width: 50%;
+    margin: auto;
+    height: 300px;
+
+  }

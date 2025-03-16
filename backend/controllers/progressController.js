@@ -3,6 +3,7 @@ const Progress = require("../models/Progress");
 // ✅ Get user's progress data
 exports.getProgress = async (req, res) => {
     try {
+        console.log("User ID from request:", req.user?.id);  
         const progress = await Progress.findOne({ userId: req.user.id });
 
         if (!progress) {

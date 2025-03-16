@@ -45,16 +45,18 @@ const Profile = () => {
         const token = localStorage.getItem("token");
         const res = await axios.put(
             "http://localhost:5000/api/user/update",
-            { name: newName, avatar: selectedAvatar, progress: user.progress }, // Include progress
+            { name: newName, avatar: selectedAvatar }, // Only update name & avatar
             { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        setUser(res.data.user);  // Ensure the updated user object is set
+        setUser(res.data.user);
+        localStorage.setItem("userAvatar", selectedAvatar); // ✅ Store in localStorage
         setIsEditing(false);
     } catch (error) {
         console.error("Error updating profile:", error.response?.data || error.message);
     }
 };
+
 
   const handleClose = () => {
     setIsEditing(false);
