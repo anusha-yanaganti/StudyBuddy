@@ -7,29 +7,30 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
+// const progressRoutes = require("./routes/progress");
 const pomodoroRoutes = require("./routes/timer");
 
 dotenv.config();
 const app = express();
 
-// CORS Configuration - Allow frontend from env or all origins in dev
-const allowedOrigins = "https://study-buddy-gray.vercel.app/";
 
+// CORS Configuration
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: "https://study-buddy-gray.vercel.app/", // Allow only frontend domain
     credentials: true, 
   })
 );
 
-// Middleware to set custom CORS headers
+//middleware
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", allowedOrigins);
-  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Origin", "https://study-buddy-gray.vercel.app/");
+  res.setHeader("Access-Control-Allow-Credentials", "true"); // ✅ This must be 'true'
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
+
 
 app.use(express.json()); // Middleware to parse JSON
 
@@ -39,8 +40,8 @@ app.use("/uploads", express.static("uploads"));
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB connected successfully"))
-  .catch((err) => console.error("❌ MongoDB connection failed:", err));
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((err) => console.error("MongoDB connection failed:", err));
 
 // Use routes
 app.use("/api/auth", authRoutes);
@@ -51,6 +52,6 @@ app.use("/api/resources", resourceRoutes);
 app.use("/api/progress", require("./routes/progress"));
 app.use("/api/timer", pomodoroRoutes);
 
-// Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+make changes in code so it can work with any frontend'
