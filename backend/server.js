@@ -12,13 +12,13 @@ const pomodoroRoutes = require("./routes/timer");
 dotenv.config();
 const app = express();
 
-// ✅ Allow frontend from environment variable or localhost (for dev)
-const allowedOrigins = ["https://study-buddy-gray.vercel.app/","https://study-buddy-git-master-anusha-yanagantis-projects.vercel.app/","https://study-buddy-anusha-yanagantis-projects.vercel.app/","http://localhost:5173"];
+// CORS Configuration - Allow frontend from env or all origins in dev
+const allowedOrigins = process.env.FRONTEND_URL || "*";
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
+    origin: allowedOrigins === "*" ? "*" : (origin, callback) => {
+      if (!origin || origin === allowedOrigins) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
@@ -28,9 +28,9 @@ app.use(
   })
 );
 
-// Middleware to set CORS headers
+// Middleware to set custom CORS headers
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", allowedOrigins.includes(req.headers.origin) ? req.headers.origin : "*");
+  res.setHeader("Access-Control-Allow-Origin", allowedOrigins);
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
