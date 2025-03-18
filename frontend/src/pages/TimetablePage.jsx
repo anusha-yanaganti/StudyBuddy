@@ -20,7 +20,7 @@ const TimetablePage = () => {
 
   const fetchTimetables = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/timetable", {
+      const res = await axios.get("https://study-buddy-backend-two.vercel.app/api/timetable", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setTimetables(res.data);
@@ -40,14 +40,14 @@ const TimetablePage = () => {
       if (editMode) {
         // Update existing timetable
         await axios.put(
-          `http://localhost:5000/api/timetable/${editId}`,
+          `https://study-buddy-backend-two.vercel.app/api/timetable/${editId}`,
           { subjects: [{ name: newPlan.name, studyHours: newPlan.studyHours }] },
           { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
         );
       } else {
         // Add new timetable
         await axios.post(
-          "http://localhost:5000/api/timetable",
+          "https://study-buddy-backend-two.vercel.app/api/timetable",
           { subjects: [{ name: newPlan.name, studyHours: newPlan.studyHours }] },
           { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
         );
@@ -76,7 +76,7 @@ const TimetablePage = () => {
   // Delete Timetable
   const deleteTimetable = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/api/timetable/${id}`, {
+      const response = await axios.delete(`https://study-buddy-backend-two.vercel.app/api/timetable/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       console.log("Delete response:", response.data); // Log response

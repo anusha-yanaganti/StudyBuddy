@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/timetable";
+const API_URL = "https://study-buddy-backend-two.vercel.app/api/timetable";
 
 // Function to attach token from localStorage
 const getAuthHeaders = () => {

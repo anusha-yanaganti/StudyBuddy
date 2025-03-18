@@ -22,7 +22,7 @@ const Profile = () => {
           navigate("/login");
           return;
         }
-        const res = await axios.get("http://localhost:5000/api/user/profile", {
+        const res = await axios.get("https://study-buddy-backend-two.vercel.app/api/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -44,7 +44,7 @@ const Profile = () => {
     try {
         const token = localStorage.getItem("token");
         const res = await axios.put(
-            "http://localhost:5000/api/user/update",
+            "https://study-buddy-backend-two.vercel.app/api/user/update",
             { name: newName, avatar: selectedAvatar }, // Only update name & avatar
             { headers: { Authorization: `Bearer ${token}` } }
         );

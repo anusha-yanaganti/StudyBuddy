@@ -26,7 +26,7 @@ const Signup = () => {
     }
   
     try {
-      await axios.post("http://localhost:5000/api/auth/signup", formData);
+      await axios.post("https://study-buddy-backend-two.vercel.app/api/auth/signup", formData);
       alert("Account created successfully!");
       navigate("/"); // Redirect to login page
     } catch (error) {

@@ -17,7 +17,7 @@ const ViewDetails = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [resourceLink, setResourceLink] = useState("");
 
-    const API_URL = "http://localhost:5000/api/resources"; // Update based on your backend URL
+    const API_URL = "https://study-buddy-backend-two.vercel.app/api/resources"; // Update based on your backend URL
 
 
 // Fetch existing resources on page load
@@ -33,7 +33,7 @@ useEffect(() => {
                 console.error("No authentication token found!");
                 return;
             }
-            const response = await axios.get(`http://localhost:5000/api/resources/${id}`, {
+            const response = await axios.get(`https://study-buddy-backend-two.vercel.app/api/resources/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`, // ✅ Send token
                 },
