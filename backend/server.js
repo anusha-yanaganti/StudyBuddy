@@ -13,17 +13,11 @@ dotenv.config();
 const app = express();
 
 // CORS Configuration - Allow frontend from env or all origins in dev
-const allowedOrigins = process.env.FRONTEND_URL || "*";
+const allowedOrigins = "https://study-buddy-gray.vercel.app/";
 
 app.use(
   cors({
-    origin: allowedOrigins === "*" ? "*" : (origin, callback) => {
-      if (!origin || origin === allowedOrigins) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: allowedOrigins,
     credentials: true, 
   })
 );
